@@ -126,7 +126,7 @@ const DisplayPanel = (props) => {
       )}
       <SettingsGroup
         title="Disable Hotkeys"
-        slug="hoekeys"
+        slug="hotkeys"
         activeSlug={disableHotkeys ? 'disableHotkeys' : ''}
         onChange={actions.toggleDisableHotkeys}
         renderer={ToggleGroup}
