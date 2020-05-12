@@ -18,6 +18,7 @@ const DisplayPanel = (props) => {
     activeTheme,
     autoHideMenuBar,
     buckets: { noteBucket },
+    disableHotkeys,
     lineLength,
     loadNotes,
     noteDisplay,
@@ -123,6 +124,15 @@ const DisplayPanel = (props) => {
           <Item title="Hide Automatically" slug="autoHide" />
         </SettingsGroup>
       )}
+      <SettingsGroup
+        title="Disable Hotkeys"
+        slug="hoekeys"
+        activeSlug={disableHotkeys ? 'disableHotkeys' : ''}
+        onChange={actions.toggleDisableHotkeys}
+        renderer={ToggleGroup}
+      >
+        <Item title="Hotkeys Disabled" slug="disableHotkeys" />
+      </SettingsGroup>
     </Fragment>
   );
 };
@@ -147,6 +157,7 @@ const mapStateToProps = ({ settings }) => {
   return {
     activeTheme: settings.theme,
     autoHideMenuBar: settings.autoHideMenuBar,
+    disableHotkeys: settings.disableHotkeys,
     lineLength: settings.lineLength,
     noteDisplay: settings.noteDisplay,
     sortIsReversed: settings.sortReversed,

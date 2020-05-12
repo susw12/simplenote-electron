@@ -45,7 +45,11 @@ type DispatchProps = {
   updateNoteTags: (args: { note: T.NoteEntity; tags: T.TagEntity[] }) => any;
 };
 
-type Props = OwnProps & DispatchProps;
+type StateProps = {
+  disableHotkeys: boolean;
+};
+
+type Props = OwnProps & DispatchProps & StateProps;
 
 const KEY_BACKSPACE = 8;
 const KEY_TAB = 9;
@@ -165,6 +169,9 @@ export class TagField extends Component<Props, OwnState> {
   };
 
   preventStealingFocus = ({ ctrlKey, metaKey, code }: KeyboardEvent) => {
+    if (this.props.disableHotkeys) {
+      return;
+    }
     const cmdOrCtrl = ctrlKey || metaKey;
 
     if (cmdOrCtrl && 'KeyT' === code) {
@@ -281,6 +288,12 @@ export class TagField extends Component<Props, OwnState> {
   }
 }
 
-export default connect(null, { updateNoteTags } as S.MapDispatch<
-  DispatchProps
->)(TagField);
+const mapStateToProps: S.MapState<StateProps> = ({
+  settings: { disableHotkeys },
+}) => ({
+  disableHotkeys,
+});
+
+export default connect(mapStateToProps, {
+  updateNoteTags,
+} as S.MapDispatch<DispatchProps>)(TagField);

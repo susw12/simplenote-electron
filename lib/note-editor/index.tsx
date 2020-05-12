@@ -16,6 +16,7 @@ type OwnProps = {
 };
 
 type StateProps = {
+  disableHotkeys: boolean;
   note: T.NoteEntity | null;
 };
 
@@ -67,6 +68,9 @@ export class NoteEditor extends Component<Props> {
   };
 
   handleShortcut = (event: KeyboardEvent) => {
+    if (this.props.disableHotkeys) {
+      return;
+    }
     const { code, ctrlKey, metaKey, shiftKey } = event;
     const { note, revision, toggleMarkdown } = this.props;
 
@@ -174,6 +178,7 @@ const mapStateToProps: S.MapState<StateProps> = ({
   allTags: tags,
   fontSize: settings.fontSize,
   editMode,
+  disableHotkeys: settings.disableHotkeys,
   isEditorActive: !state.showNavigation,
   note,
   revision: selectedRevision,

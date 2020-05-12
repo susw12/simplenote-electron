@@ -40,6 +40,7 @@ const isElectron = (() => {
 
 type StateProps = {
   editingEnabled: boolean;
+  disableHotkeys: boolean;
   searchQuery: string;
 };
 
@@ -309,6 +310,9 @@ class NoteContentEditor extends Component<Props> {
   };
 
   handleKeydown = (event: KeyboardEvent) => {
+    if (this.props.disableHotkeys) {
+      return;
+    }
     const { code, ctrlKey, metaKey, shiftKey } = event;
     const cmdOrCtrl = ctrlKey || metaKey;
 
@@ -376,7 +380,9 @@ class NoteContentEditor extends Component<Props> {
 
 const mapStateToProps: S.MapState<StateProps> = ({
   ui: { searchQuery, showNoteList },
+  settings: { disableHotkeys },
 }) => ({
+  disableHotkeys,
   searchQuery,
 });
 

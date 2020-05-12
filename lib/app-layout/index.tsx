@@ -34,6 +34,7 @@ type OwnProps = {
 
 type StateProps = {
   isNoteOpen: boolean;
+  disableHotkeys: boolean;
   keyboardShortcutsAreOpen: boolean;
   showNoteList: boolean;
 };
@@ -55,6 +56,9 @@ export class AppLayout extends Component<Props> {
   }
 
   openKeybindingsHelp = (event: KeyboardEvent) => {
+    if (this.props.disableHotkeys) {
+      return;
+    }
     const {
       hideKeyboardShortcuts,
       keyboardShortcutsAreOpen,
@@ -134,8 +138,10 @@ export class AppLayout extends Component<Props> {
 
 const mapStateToProps: S.MapState<StateProps> = ({
   ui: { dialogs, showNoteList },
+  settings: { disableHotkeys },
 }) => ({
   keyboardShortcutsAreOpen: dialogs.includes('KEYBINDINGS'),
+  disableHotkeys,
   isNoteOpen: !showNoteList,
   showNoteList,
 });

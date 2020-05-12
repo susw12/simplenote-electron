@@ -49,6 +49,15 @@ export const setLineLength: A.ActionCreator<A.SetLineLength> = (
   lineLength,
 });
 
+export const toggleDisableHotkeys = () => (dispatch, getState) => {
+  const newValue = !getState().settings.disableHotkeys;
+
+  dispatch({
+    type: 'setDisableHotkeys',
+    disableHotkeys: newValue,
+  });
+};
+
 export const toggleSortOrder = () => (dispatch, getState) => {
   dispatch({
     type: 'setSortReversed',

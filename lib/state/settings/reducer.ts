@@ -8,6 +8,7 @@ export const initialState = {
   autoHideMenuBar: false,
   focusModeEnabled: false,
   fontSize: 16,
+  disableHotkeys: false,
   lineLength: 'narrow' as T.LineLength,
   markdownEnabled: false,
   noteDisplay: 'comfy' as T.ListDisplayMode,
@@ -35,6 +36,8 @@ const reducer: A.Reducer<typeof initialState> = (
         ...state,
         fontSize: clamp(action.fontSize || initialState.fontSize, 10, 30),
       };
+    case 'setDisableHotkeys':
+      return { ...state, disableHotkeys: action.disableHotkeys };
     case 'setLineLength':
       return { ...state, lineLength: action.lineLength };
     case 'SET_SYSTEM_TAG':

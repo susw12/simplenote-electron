@@ -20,6 +20,7 @@ type OwnProps = {
 
 type StateProps = {
   isDialogOpen: boolean;
+  disableHotkeys: boolean;
   note: T.NoteEntity | null;
   searchQuery: string;
   showNoteInfo: boolean;
@@ -199,6 +200,9 @@ export class NoteDetail extends Component<Props> {
   };
 
   handlePreviewKeydown = (event: KeyboardEvent) => {
+    if (this.props.disableHotkeys) {
+      return;
+    }
     const { ctrlKey, code, metaKey, shiftKey } = event;
 
     const cmdOrCtrl = ctrlKey || metaKey;
@@ -305,6 +309,7 @@ export class NoteDetail extends Component<Props> {
 
 const mapStateToProps: S.MapState<StateProps> = ({ ui, settings }) => ({
   isDialogOpen: ui.dialogs.length > 0,
+  disableHotkeys: settings.disableHotkeys,
   note: ui.selectedRevision || ui.note,
   searchQuery: ui.searchQuery,
   showNoteInfo: ui.showNoteInfo,

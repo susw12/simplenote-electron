@@ -13,6 +13,10 @@ export type SetAutoHideMenuBar = Action<
   'setAutoHideMenuBar',
   { autoHideMenuBar: boolean }
 >;
+export type SetDisableHotkeys = Action<
+  'setDisableHotkeys',
+  { disableHotkeys: boolean }
+>;
 export type SetFocusMode = Action<
   'setFocusMode',
   { focusModeEnabled: boolean }
@@ -121,6 +125,7 @@ export type ActionType =
   | SelectTrash
   | SetAccountName
   | SetAutoHideMenuBar
+  | SetDisableHotkeys
   | SetFocusMode
   | SetFontSize
   | SetLineLength
